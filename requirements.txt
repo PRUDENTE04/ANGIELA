@@ -2,3 +2,4 @@ streamlit
 requests
 streamlit_lottie
 Pillow
+plotly
