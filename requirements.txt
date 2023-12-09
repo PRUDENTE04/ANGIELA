@@ -1,4 +1,4 @@
-steamlit
+streamlit
 requests
 streamlit_lottie
 Pillow
