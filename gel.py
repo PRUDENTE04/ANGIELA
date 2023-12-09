@@ -1,11 +1,49 @@
+import base64
+import plotly.express as px
 import requests
 import streamlit as st
 from streamlit_lottie import st_lottie
 from PIL import Image
 
-
 # Find more emojis here: https://www.webfx.com/tools/emoji-cheat-sheet/
 st.set_page_config(page_title="My Webpage", page_icon=":tada:", layout="wide")
+
+df = px.data.iris()
+
+@st.cache_data
+def get_img_as_base64(file):
+        with open(file, "rb") as f:
+            data = f.read()
+        return base64.b64encode(data).decode()
+
+
+img = get_img_as_base64("download.jfif")
+page_bg_img = f"""
+    <style>
+    [data-testid="stAppViewContainer"] > .main {{
+    background-image: url("data:image/png;base64,{img}");
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-size: 110%;
+    background-attachment: local;
+    }}
+    [data-testid="stSidebar"] > div:first-child {{
+    background-image: url("data:image/png;base64,{img}");
+    background-position: left; 
+    background-repeat: no-repeat;
+    background-size: 150%;
+    background-attachment: local;
+    }}
+
+    [data-testid="stHeader"] {{
+    background: rgba(0,0,0,0);
+    }}
+
+    [data-testid="stToolbar"] {{
+    right: 2rem;
+    }}
+    </style>
+    """
 
 
 def load_lottieurl(url):
@@ -42,7 +80,7 @@ with st.container():
     st.write("---")
     left_column, right_column = st.columns(2)
     with left_column:
-        st.header("women Empowerment")
+        st.header("Women Empowerment")
         st.write("##")
         st.write(
             """
@@ -79,7 +117,7 @@ with st.container():
 
             """
         )
-        st.markdown("[Watch Video...](https://github.com/PRUDENTE04/ANGIELA)")
+        st.markdown("[Watch Video...](https://www.youtube.com/watch?v=PC0Zx7VxxNg)")
 with st.container():
     image_column, text_column = st.columns((1, 2))
     with image_column:
@@ -94,27 +132,20 @@ with st.container():
 
             """
         )
-        st.markdown("[Watch Video...](https://github.com/PRUDENTE04/ANGIELA)")
+        st.markdown("[Watch Video...](https://www.youtube.com/watch?v=rP_Y_S87Tpo&t=5s)")
 
-# ---- CONTACT ----
-with st.container():
-    st.write("---")
-    st.header("Get In Touch With Me!")
-    st.write("##")
-
-    # Documention: https://formsubmit.co/ !!! CHANGE EMAIL ADDRESS !!!
-    contact_form = """
-    <form action="https://formsubmit.co/aprudente@ssct.edu.ph." method="POST">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="text" name="name" placeholder="Your name" required>
-        <input type="email" name="email" placeholder="Your email" required>
-        <textarea name="message" placeholder="Your message here" required></textarea>
-        <button type="submit">Send</button>
-    </form>
-    """
-    def local_css(file_name):
-        with open(file_name) as f:
-            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
-
-    local_css("style.css")
+  # Documention: https://formsubmit.co/ !!! CHANGE EMAIL ADDRESS !!!
+contact_form = """
+            <form action="https://formsubmit.co/YOUR@MAIL.COM" method="POST">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="text" name="name" placeholder="Your name" required>
+                <input type="email" name="email" placeholder="Your email" required>
+                <textarea name="message" placeholder="Your message here" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+            """
+left_column, right_column = st.columns(2)
+with left_column:
+                st.markdown(contact_form, unsafe_allow_html=True)
+with right_column:
+                st.empty()
