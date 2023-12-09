@@ -1,0 +1,4 @@
+steamlit
+requests
+streamlit_lottie
+Pillow
